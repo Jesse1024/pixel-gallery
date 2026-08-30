@@ -1488,6 +1488,7 @@ body.manage .add-corner { display: block; }
   .frame:nth-child(even) { margin-top: 1.5vh; }
   .nav-arrow { width: 40px; height: 52px; }
   .lb-panel { flex-direction: column; align-items: center; overflow-y: auto; }
+  #lbClose { position: fixed; top: calc(2vh + 8px); right: calc(2vw + 8px); width: 40px; height: 40px; z-index: 5; }
   .lb-img { width: min(70vw, 320px); height: auto; }
   .lb-img-wrap.zoom { top: 2vh; left: 2vw; width: 96vw; height: 96vh; }
   .lb-img-wrap.zoom .lb-restore { top: calc(2vh + 10px); right: calc(2vw + 10px); }
