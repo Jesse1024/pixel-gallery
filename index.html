@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>像素回廊 · 摄影集</title>
+  <meta name="description" content="一间装在浏览器里的像素画廊，挂着我拍下的光。">
+  <link rel="icon" type="image/png" href="assets/avatar.png">
+  <link rel="stylesheet" href="css/fonts.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <div id="loader">
+    <div class="loader-box">
+      <div class="loader-title">像素回廊</div>
+      <div class="loader-bar"><i></i></div>
+      <p>正在布置展厅 …</p>
+    </div>
+  </div>
+
+  <header id="hud-top">
+    <div class="chip">▚ 像素回廊</div>
+    <div class="chip" id="roomName">门厅</div>
+  </header>
+
+  <main id="stage-wrap">
+    <div id="stage">
+
+      <section class="room room-lobby" data-name="门厅">
+        <div class="cloud c1"></div>
+        <div class="cloud c2"></div>
+        <div class="plant"></div>
+        <div class="lobby-inner">
+          <div class="lobby-kicker">PHOTOGRAPHY EXHIBITION</div>
+          <h1>像素回廊</h1>
+          <p class="sub">PIXEL CORRIDOR · 一个人的摄影展</p>
+          <div class="lobby-index" id="lobbyIndex"></div>
+          <button class="sign" id="enterBtn" type="button">▶ 进入展厅（→）</button>
+          <p class="credit">策展人：南山怪客 · 常年寻找好看的光</p>
+        </div>
+      </section>
+
+      <div id="series-anchor" hidden></div>
+
+      <section class="room room-about" data-name="关于怪客">
+        <div class="bench"></div>
+        <div class="about-wrap">
+          <div class="about-side">
+            <figure class="portrait">
+              <span class="frame-inner"><img src="assets/portrait.jpg" alt="南山怪客"></span>
+              <figcaption class="plaque">馆长 · 南山怪客</figcaption>
+            </figure>
+            <div class="about-avatar-chip"><img src="assets/avatar.png" alt="像素分身">像素分身 · LV.99</div>
+          </div>
+          <div class="about-text">
+            <h2>关于南山怪客</h2>
+            <p class="about-tagline">—— 一个把相机当作时间存档机的人</p>
+            <p>你好，我是南山怪客。我拍得最多的主角是两只猫，它们叫团团圆圆；剩下的一半快门，给了运河体育公园的风、草地上的光斑，和一切被我称作「日常观看」的普通瞬间。</p>
+            <p>我不太追逐远方的奇观，取景框大多对准家附近一公里的温柔。拍完的照片在 Lightroom 里慢慢显影，再被挂进这间像素回廊——对我来说，这里不是相册，而是一间 24 小时开门的小画廊：策展人是我，观众是你。</p>
+            <p>如果某一张照片恰好击中了你，欢迎来小宇宙或公众号告诉我。那会是我下一次按下快门的理由。</p>
+            <ul class="menu">
+              <li><span class="chip-link">▸ 小宇宙播客 · 南山怪客</span></li>
+              <li><span class="chip-link">▸ 公众号 · 24帧的真实</span></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <button class="nav-arrow left" id="navLeft" type="button" aria-label="上一间展厅">&lt;&lt;</button>
+  <button class="nav-arrow right" id="navRight" type="button" aria-label="下一间展厅">&gt;&gt;</button>
+
+  <footer id="hud-bottom">
+    <span class="chip"><kbd>←</kbd><kbd>→</kbd> 移动</span>
+    <span class="chip">点击画作 · 查看档案</span>
+    <span class="chip"><kbd>ESC</kbd> 关闭档案</span>
+  </footer>
+
+  <button class="manage-toggle" id="manageBtn" type="button">管理</button>
+  <button class="home-chip" id="homeBtn" type="button">↑ 门厅</button>
+  <button class="music-toggle" id="musicBtn" type="button">♪ 音乐关</button>
+  <audio id="bgm" src="assets/music/asleep-in-the-forest.mp3" loop preload="auto"></audio>
+
+  <div id="walker" class="idle" aria-hidden="true">
+    <img class="a" src="assets/sprite-idle.png" alt="">
+    <img class="b" src="assets/sprite-walk.png" alt="">
+  </div>
+
+  <div id="lightbox" role="dialog" aria-modal="true" aria-label="作品档案" hidden>
+    <div class="lb-panel">
+      <button id="lbClose" type="button" aria-label="关闭">X</button>
+      <div class="lb-img-wrap" id="lbWrap">
+        <img class="lb-img" id="lbImg" src="" alt="">
+        <button class="lb-zoom" id="lbZoom" type="button" aria-label="查看原大">⤢ 原大</button>
+        <button class="lb-restore" id="lbRestore" type="button" aria-label="恢复档案卡">✕ 还原</button>
+        <button class="lb-autoscroll" id="lbAuto" type="button" aria-label="长按自动下滑">▼ 长按下滑</button>
+        <button class="lb-autoscroll" id="lbAutoH" type="button" aria-label="长按自动横滑">▶ 长按横滑</button>
+      </div>
+      <div class="lb-info">
+        <h3 id="lbTitle"></h3>
+        <p class="lb-desc" id="lbDesc"></p>
+        <ul class="lb-stats" id="lbExif"></ul>
+        <p class="lb-note" id="lbNote" hidden>※ 此文件未携带拍摄参数（EXIF）</p>
+        <div class="lb-foot">
+          <span class="series-tag" id="lbTag"></span>
+          <span class="lb-nav">
+            <button id="lbPrev" type="button" aria-label="上一张">&lt;</button>
+            <button id="lbNext" type="button" aria-label="下一张">&gt;</button>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="scanlines" aria-hidden="true"></div>
+
+  <input type="file" id="filePick" multiple accept="image/jpeg,image/png,image/webp,.jpg,.jpeg,.png,.webp" hidden>
+
+  <script src="js/photos-data.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

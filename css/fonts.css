@@ -1,0 +1,9 @@
+/* Fusion Pixel 12px Proportional SC - self-hosted */
+@font-face {
+  font-family: 'Fusion Pixel 12px Proportional SC';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 400;
+  src: url(../assets/fonts/fusion-pixel-sc-400.woff2) format('woff2'),
+       url(../assets/fonts/fusion-pixel-sc-400.woff) format('woff');
+}
